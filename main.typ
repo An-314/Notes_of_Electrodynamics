@@ -14,3 +14,11 @@
 #pagebreak(weak: true)
 
 #include "chap1.typ"
+
+#pagebreak(weak: true)
+
+#include "chap2.typ"
+
+#pagebreak(weak: true)
+
+#include "appendix.typ"
