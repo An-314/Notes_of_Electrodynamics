@@ -451,3 +451,31 @@ curl vb(F) &= curl(- grad V + curl vb(A)) =curl(curl vb(A)) = - laplacian vb(A) 
 &= vb(C)(vb(r)) + 1/(4 pi) integral.cont 1/abs(vb(r) - vb(r')) vb(C(vb(r'))) dot dd(vb(a)')\
 &= vb(C)(vb(r))
 $
+
+=== 场的势 Potentials
+
+如果矢量场 $vb(F)$ 的旋度（在任何地方）都为 $0$ ，那么 $vb(F)$ 可以写成标量势 $V$ 的梯度：
+$
+curl vb(F) = 0 <=> vb(F) = - grad V
+$
+
+定理：以下四种说法是等价的
+- $curl vb(F)$处处为0
+- $integral_a^b vb(F) dot dd(vb(l))$与路径无关
+- $integral.cont vb(F) dot dd(vb(l)) = 0$对任意回路成立
+- $vb(F)$是某个势的梯度$vb(F) = - grad V$
+
+如果矢量场$vb(F)$ 的散度（在任何地方）都为 $0$ ，那么 $vb(F)$ 可以写成矢量势 $vb(F)$ 的旋度：
+$
+div vb(F) = 0 <=> vb(F) = curl vb(A)
+$
+
+定理：以下四种说法是等价的
+- $div vb(F)$处处为0
+- $integral vb(F) dot dd(vb(a))$与表面无关，适用于任何给定的边界。
+- $integral.cont vb(F) dot dd(vb(l)) = 0$对任意闭合表面成立
+- $vb(F)$是某个旋度的势$vb(F) = curl vb(A)$
+
+_注：_
+- 上述标量势 $V$ 和矢量势 $vb(A)$ 并不是唯一的，可以加上任意常数或梯度场。
+- 在任何情况下，矢量场 $vb(F)$ 都可以写成标量的梯度加上矢量的旋度。
