@@ -221,7 +221,7 @@ $
 
 - Laplacian
 $
-div(grad T) = nabla dot (grad T) = nabla^2 T = (partial^2 T)/(partial x^2) + (partial^2 T)/(partial y^2) + (partial^2 T)/(partial z^2)\
+div(grad T) = nabla^2 T = (partial^2 T)/(partial x^2) + (partial^2 T)/(partial y^2) + (partial^2 T)/(partial z^2)\
 $
 $
 laplacian vb(v) = (laplacian v_x) vu(x) + (laplacian v_y) vu(y) + (laplacian v_z) vu(z)
