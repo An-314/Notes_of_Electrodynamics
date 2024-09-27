@@ -448,6 +448,8 @@ $
 
 === 一些Green函数的例子
 
+利用镜像电荷法：
+
 $
 Phi(vb(x)) = 1/(4 pi epsilon_0 R) = 1/(4 pi epsilon_0 sqrt((x-x')^2 + (y-y')^2 + (z-z')^2))\
 $
@@ -531,3 +533,419 @@ $
 $
 eval(partialderivative(G,n'))_Sigma' = - eval(partialderivative(G,rho'))_(rho' = a) = - (2(rho^2-a^2))/(a(rho^2+a^2-2rho a cos(phi - phi')))\
 $
+
+== 静电场势能 Electrostatic Potential Energy and Energy Density; Capacitance
+
+=== 电势能 Electrostatic Potential Energy
+
+电势能是在标量电势$Phi$（在无穷远处消失）描述的*局部*电场区域中，点电荷 $q_i$ 从无穷远处到达 $x$ 时对电荷所做的功：
+$
+W &= - integral_A^B vb(F) dot dd(vb(l)) = - q integral_A^B vb(E) dot dd(vb(l)) = q integral_A^B grad Phi dot dd(vb(l))\
+&= q integral_A^B dd(Phi) = q (Phi(B) - Phi(A))\
+$
+从而
+$
+W_i = q_i Phi(vb(x_i))\
+$
+其中$vb(x)$中的电势为
+$
+Phi(vb(x)) = 1/(4 pi epsilon_0) sum_(j=1,!=i)^(n) q_j/abs(vb(x) - vb(x_j))\
+$
+电荷$q_i$在$vb(x_i)$位置的势能：
+$
+W_i = q_i Phi(vb(x_i)) = q_i/(4 pi epsilon_0) sum_(j=1,!=i)^(n) q_j/abs(vb(x_i) - vb(x_j))\
+$
+
+=== The Total Potential Energy
+
+求和得到
+#text(fill: blue)[
+$
+W &= 1/(4 pi epsilon_0) sum_(i=1)^(n) sum_(j<i) (q_i q_j)/abs(vb(x_i) - vb(x_j))\
+&= 1/(8 pi epsilon_0) sum_(i!=j) q_i q_j/abs(vb(x_i) - vb(x_j))\
+$
+]
+这里没有$i=j$一项，故考虑是互能而忽略自能。
+
+如果是连续分布
+$
+W = 1/(8 pi epsilon_0) integral integral (rho(vb(x)) rho(vb(x')))/abs(vb(x) - vb(x')) dd(vb(x),3) dd(vb(x'),3)\
+$
+而
+$
+Phi(vb(x)) = 1/(4 pi epsilon_0) integral rho(vb(x'))/abs(vb(x) - vb(x')) dd(vb(x'), 3)\
+$
+从而
+#text(fill: blue)[
+$
+W = 1/2 integral Phi(vb(x)) rho(vb(x)) dd(vb(x),3)\
+$
+]
+这里考虑了自能。
+
+=== 能量密度 Energy Density
+
+如何通过场解读能量？
+
+$
+W &= 1/(2 epsilon_0) integral Phi(vb(x)) rho(vb(x)) dd(vb(x),3)\
+&=^(laplacian Phi = - rho/epsilon_0) - epsilon_0/(2) integral Phi(vb(x)) laplacian Phi(vb(x)) dd(vb(x),3)\
+&= epsilon_0/2 integral abs(grad Phi)^2 dd(vb(x),3)\
+&= epsilon_0/2 integral abs(E)^2 dd(vb(x),3)\
+$
+积分是在所有空间上进行的，因此表面积分是在无穷大表面上进行的，在无穷大表面上，势为零，场也为零。
+
+从而得到
+#text(fill: blue)[
+$
+w = 1/2 epsilon_0 abs(E)^2
+$
+]
+这个式子考虑了包含"自能 "贡献和相互作用势能。
+
+- 考虑位于$vb(x_1)$和$vb(x_2)$的两个点电荷$q_1$和$q_2$：
+$
+E = 1/(4 pi epsilon_0) (q_1 (vb(x) - vb(x_1))/abs(vb(x) - vb(x_1))^3 + q_2 (vb(x) - vb(x_2))/abs(vb(x) - vb(x_2))^3)\
+abs(E)^2 = 1/(16 pi^2 epsilon_0^2) (q_1^2/abs(vb(x) - vb(x_1))^4 + q_2^2/abs(vb(x) - vb(x_2))^4 + 2 (q_1 q_2 (vb(x) - vb(x_1)) dot (vb(x) - vb(x_2)))/(abs(vb(x) - vb(x_1))^3 abs(vb(x) - vb(x_2))^3)\
+$
+从而
+$
+32 pi^2 epsilon_0^2 w = q_1^2/abs(vb(x) - vb(x_1))^4 + q_2^2/abs(vb(x) - vb(x_2))^4 + 2 (q_1 q_2 (vb(x) - vb(x_1)) dot (vb(x) - vb(x_2)))/(abs(vb(x) - vb(x_1))^3 abs(vb(x) - vb(x_2))^3)\
+$
+其中前两项是自能、后一项是互能。
+
+=== 互能 interaction potential energy
+
+$
+W_"int" = (q_1 q_2)/(16 pi^2 epsilon_0) integral ((vb(x) - vb(x_1)) dot (vb(x) - vb(x_2)))/(abs(vb(x) - vb(x_1))^3 abs(vb(x) - vb(x_2))^3) dd(vb(x),3)\
+$
+令
+$
+vb(rho) = (vb(x) - vb(x_1))/abs(vb(x_1) - vb(x_2)), vb(n) = (vb(x_1) - vb(x_2))/abs(vb(x_1) - vb(x_2))\
+$
+则有
+$
+W_"int" = 1/(4 pi epsilon_0) (q_1 q_2)/abs(vb(x_1) - vb(x_2)) (1/(4 pi) integral (vb(rho) dot (vb(rho) + vb(n)))/(abs(vb(rho))^3 abs(vb(rho) + vb(n))^3) dd(vb(rho),3))\
+$
+这是因为
+$
+integral ((vb(x) - vb(x_1)) dot (vb(x) - vb(x_2)))/(abs(vb(x) - vb(x_1))^3 abs(vb(x) - vb(x_2))^3) dd(vb(x),3) &= integral ((vb(x) - vb(x_1)) dot (vb(x) - vb(x_2)))/(abs(vb(x) - vb(x_1))^3 abs(vb(x) - vb(x_2))^3) abs(vb(x_1) - vb(x_2))^3 dd(rho,3)\
+&= 1/abs(vb(x_1) - vb(x_2)) integral (vb(rho) dot (vb(rho) + vb(n)))/(abs(vb(rho))^3 abs(vb(rho) + vb(n))^3) dd(vb(rho),3)\
+$
+而
+$
+(vb(rho) + vb(n))/abs(vb(rho) + vb(n))^3 = - bold(nabla)_rho (1/abs(vb(rho) + vb(n)))
+$
+则有
+$
+integral (vb(rho) dot (vb(rho) + vb(n)))/(abs(vb(rho))^3 abs(vb(rho) + vb(n))^3) dd(vb(rho),3) &= - integral (vb(rho)/rho^3 dot bold(nabla)_rho (1/abs(vb(rho) + vb(n)))) dd(vb(rho),3)\
+&= = integral bold(nabla)_rho ( vb(rho)/rho^3 1/abs(vb(rho) + vb(n))) dd(vb(rho),3) + integral 1/abs(vb(rho) + vb(n)) bold(nabla)_rho dot (vb(rho)/rho^3) dd(vb(rho),3)\
+&= - integral_S (vb(rho)/rho^3 1/abs(vb(rho) + vb(n))) dot vu(n) dd(a) + integral_S 1/abs(vb(rho) + vb(n)) 4 pi delta(vb(rho)) dot vu(n) dd(a)\
+&= 4pi
+$
+从而得到
+$
+W_"int" = 1/(4 pi epsilon_0) (q_1 q_2)/abs(vb(x_1) - vb(x_2))\
+$
+
+*Thomson原理*：在电荷分布的情况下，电荷会尽可能地聚集在一起，以减少总能量。
+
+#problem[表面电荷密度$𝜎(x)$导体表面单位面积上的力。]
+#solution[
+$
+vu(n) dot (vb(E_2) - vb(E_1)) = sigma/epsilon_0\
+vb(E_1) = 0 => vu(n) dot vb(E_2) = sigma/epsilon_0\
+$
+则有能量密度
+$
+w = 1/2 epsilon_0 abs(vb(E))^2 = sigma^2/(2 epsilon_0)\
+$
+现在，如果我们想象导体表面的面元$Δ a$向外发生微小位移$Δ x$，静电能量就会减少：
+$
+Delta W = - sigma^2/(2 epsilon_0) Delta a Delta x\
+$
+从而有在单位面积上的力
+$
+F = -derivative(W,x) = sigma^2/(2 epsilon_0)\
+$
+]
+
+#problem[导体系统的势能]
+#solution[
+考虑一个由$n$个导体组成的系统，每个导体都具有电势$V_i$和总电荷$Q_i$（$i=1,2,...n$）。
+
+$
+V_i = sum_(j = 1)^n p_(i j) Q_j
+$
+其中$p_(i j)$依赖于导体的几何形状和位置
+$
+Q_i = sum_(j = 1)^n C_(i j) V_j
+$
+其中，*导体的电容* ($C_(i i)$)是导体保持单位电位时的总电荷量，所有其他导体都保持零电位；感应系数($C_(i j)$)可用来表示两个导体系统的电容。
+
+导体系统的势能：
+$
+W = 1/2 sum_(i = 1)^n Q_i V_i = 1/2 sum_(i = 1)^n sum_(j = 1)^n C_(i j) V_i V_j\
+$
+]
+
+#problem[半径为 $b$、电荷量为 $Q$ 的球形导体外壳。求： 
++ 它的电容，
++ 半径$r$处的能量密度
++ 总电场能量
++ 如果在它里面再放一个半径为$a$的金属球壳，使内壳处的电场最小，求$a$和$b$的关系。
+]
+#solution[
++ 电容
+
+  由Gauss定律：
+  $
+  E(r) = Q/(4 pi epsilon_0 r^2) vu(e_r)
+  $
+  进一步可以得到电势
+  $
+  V(r) = integral_r^oo E(r) dd(r) = Q/(4 pi epsilon_0 r)
+  $
+  从而得到电容
+  $
+  C = Q/V(b) = 4 pi epsilon_0 b
+  $
+
++ 能量密度
+
+  由能量密度的定义：
+  $
+  w(r) = 1/2 epsilon_0 E(r)^2 = Q^2/(32 pi^2 epsilon_0 r^4)
+  $
+
++  总电场能量
+
+  由能量密度的定义：
+  $
+  W_e = 4 pi epsilon_0 integral_0^b w(r) r^2 dd(r) = Q^2/(8 pi epsilon_0 b)\
+  W_e = 1/2 V(b) Q = Q^2/(8 pi epsilon_0 b)\
+  $
+
++ 金属球壳
+
+  由Gauss定律：
+  $
+  E(r) = Q/(4 pi epsilon_0 r^2) vu(e_r) (a<r<b)
+  $
+  进一步可以得到电势
+  $
+  V(r) = integral_a^b E(r) dd(r) = Q/(4 pi epsilon_0) (1/a - 1/b)
+  $
+  从而得到电容
+  $
+  C = Q/V(b) = (4 pi epsilon_0 )/(1/a - 1/b)
+  $
+  从而
+  $
+  E(r) = (4 pi epsilon_0 V)/(4 pi epsilon_0 r^2 (1/a - 1/b)) e_r = V/(r^2 (1/a - 1/b)) e_r\
+  E(a) = (V b)/(a b - a^2)
+  $
+  为了使内壳处的电场最小
+  $
+  derivative(E(a),a) = 0 => a = b/2, E(a) = (4V)/b
+  $
+
+]
+
+== 求解拉普拉斯方程和泊松方程的变分法 Variational Method for Solving Laplace’s and Poisson’s Equations
+
+=== 泛函 Functional
+
+函数指从空间$X$（函数空间）到实数或复数的映射，被视为函数的函数。
+
+函数通常表示为涉及函数及其导数的定积分。
+
+例如：
+$
+I(y(x)) = integral_(x_1)^(x_2) f(x, y(x), y_x (x)) dd(x)
+$
+- 两点之间的距离
+  $
+  L = integral_(x_1)^(x_2) sqrt(1 + y_x^2) dd(x)
+  $
+- 两点下的最速下降线
+  $
+  T = integral_(x_1)^(x_2) sqrt(1 + y_x^2)/sqrt(2 g y) dd(x)
+  $
+
+=== 变分原理 Variational Principle
+
+变分法微积分中使用的一种科学原理，它为寻找使依赖于这些函数的量的值极值化的函数提供了一般方法。
+
+- Principle of least action（最⼩作⽤量原理）
+- Hamilton’s principle in physics （哈密尔顿物理学原理）
+- Thomson’s theorem in electrostatics（汤姆逊静电定理）
+- Fermat’s principle in optics（光学费马原理）
+
+1. *Principle of Least Action（最小作用量原理）*
+  
+    最小作用量原理是物理学中的一个基本原理，特别是在经典力学、量子力学和相对论中具有广泛应用。它指出一个系统的运动轨迹是使得某种数量（称为“作用量”）达到极小或极值的轨迹。作用量通常定义为在给定时间段内拉格朗日量（系统的动能与势能之差）在时间上的积分。
+
+    简单地说，物体从一个状态移动到另一个状态时，它会选择一条使得“作用量”最小的路径。这与牛顿的力学方程是一致的，但提供了一种从整体上描述运动的方式，而不是逐点计算物体的运动。
+
+2. *Hamilton’s Principle in Physics（哈密尔顿物理学原理）*
+
+    哈密尔顿原理是最小作用量原理的具体形式之一。它表述为：一个物理系统在两点之间的运动会使其作用量达到极小（或某些情况下是极值）。在这个原理中，作用量 \(S\) 是系统的拉格朗日函数 \(L\) 在时间 \(t_1\) 到 \(t_2\) 之间的积分：
+
+    $
+    S = integral_(t_1)^(t_2) L(q, q', t) dd(t)
+    $
+
+    哈密尔顿原理是许多物理定律（例如经典力学、量子力学、相对论等）的基础。通过这个原理，我们可以从极值问题中导出拉格朗日方程，从而描述系统的动力学。
+
+3. *Thomson’s Theorem in Electrostatics（汤姆逊静电定理）*
+
+  汤姆逊定理主要应用于静电学，描述的是电荷在导体表面的分布。该定理指出，在静电平衡时，导体表面的电荷分布是使得电势能最小的分布。具体来说，电荷在导体表面上会重新排列，直到达到静电平衡，此时电势能达到极小值。
+
+  这个定理的物理意义是，电荷倾向于在导体表面以某种方式分布，使得整个系统的能量是最小的。这也解释了为什么在静电平衡时，导体的电场在其内部为零。
+
+4. *Fermat’s Principle in Optics（光学费马原理）*
+
+  费马原理是光学中的基本原理之一，它表述了光在传播过程中会选择一种使其光程最短的路径。光程是光在介质中的传播距离与介质的折射率的乘积。费马原理可以解释光的反射和折射现象，实际上它是斯涅尔定律的背后理论依据。
+
+  费马原理用数学的语言来说，就是光在两个点之间传播时，经过的路径会使得从起点到终点的光程达到极值（通常是最小值）。例如，当光从空气进入水中时，它会改变传播方向，以使得从空气到水的总光程最短，这就是折射现象。
+
+
+#figure(
+  image("pic/2024-09-25-10-58-58.png", width: 40%),
+  numbering: none,
+)
+
+随着系统的演化，$q$在配置空间中描绘出一条路径（仅显示部分路径）。在系统配置（$δ q$）发生微小变化的情况下，系统走过的路径（红色）具有静态作用（$δ S = 0$）。
+
+- 如何找到所需的极值函数？
+  - 找到一个函数。这是 E/M 场的类能量函数。它的极值函数应是泊松方程。
+  - 用一些待定义的参数构建一个"试验"函数。
+  - 将 "试验 "函数放入函数中，并设置未定义参数的偏导数。 
+  - 解方程。
+
+=== Dirichlet/Neumann 边界条件下的泛函
+
+- For Dirichlet boundary condition:
+
+$
+I(Psi) = 1/2 integral_V grad Psi dot grad Psi dd(x,3) - integral_V g Psi dd(x,3)\
+$
+其中
+- $I(𝛹)$：类能量函数
+- $𝛹(x)$：在体积$V$内部和表面$S$上都well-behaved
+- $g(x)$：在体积$V$内部没有奇异点的特殊源函数
+
+*当泛函的变分为零时，泛函会获得极值。*
+
+$
+delta I(Psi) &= I(Psi + delta Psi) - I(Psi) = integral_V grad Psi dot grad delta Psi dd(x,3) - integral_V g delta Psi dd(x,3)\
+$
+由@Green1[Green公式]，有
+$
+integral_V (delta Psi laplacian Psi + grad (delta Psi) dot grad Psi) dd(x,3) = integral.cont_S delta Psi partialderivative(Psi,n) dd(a)\
+$
+则有
+$
+delta I(Psi) &= - integral_V delta Psi laplacian Psi dd(x,3) - integral_V g delta Psi dd(x,3) + integral.cont_S delta Psi partialderivative(Psi,n) dd(a)\
+&= integral_V (- laplacian Psi - g) delta Psi dd(x,3) + integral.cont_S partialderivative(Psi,n) delta Psi dd(a)\
+$
+考虑到边界面上的$δ Psi=0$（Dirichlet 边界条件）。我们得到
+$
+laplacian Psi = - g -> laplacian psi = - rho/epsilon_0\
+$
+
+- For Neumann boundary condition:
+
+$
+I(Psi) = 1/2 integral_V grad Psi dot grad Psi dd(x,3) - integral_V rho Psi dd(x,3) - integral.cont_S f Psi dd(a)\
+$
+其中
+$
+eval(partialderivative(Psi,n))_S = f(vb(s))\
+$
+就有
+$
+delta I(Psi) - integral_V (- laplacian Psi - g) delta Psi dd(x,3) + integral.cont_S delta Psi (partialderivative(Psi,n) - f(s)) dd(a) -> laplacian Psi = - g "within" V
+$
+
+#problem[(Two-dimensional problem)
+一个单位半径的空心圆柱体以$z$轴为中心，内部源密度为
+$
+g(vb(x)) = g(rho) = - 5(1-rho) + 10^4 rho^5 (1-rho)^5
+$
+角方向对称，与$z$无关。电势在$ρ=1$时消失。
+]
+#solution[
+- Functional: Dirichlet boundary
+
+  $
+  I(Psi) = 1/2 integral_V grad Psi dot grad Psi dd(x,3) - integral_V g Psi dd(x,3)\
+  $
+
+- "试验" 函数
+
+  $
+  Psi_1 = alpha_1 (1-rho) + beta_1 (1 - rho)^2 + gamma_1 (1 - rho)^3\
+  Psi_2 = alpha rho^2 + beta rho^3 + gamma rho^4 - (alpha + beta + gamma)
+  $
+
+- 将泛函代入
+
+  $
+  delta I(Psi) = integral_V (- laplacian Psi - g) delta Psi dd(x,3) + integral.cont_S partialderivative(Psi,n) delta Psi dd(a)\
+  $
+
+  #figure(
+    image("pic/2024-09-25-16-16-09.png", width: 80%),
+    numbering: none,
+  )
+  将 α、β、γ 的偏导数设为零，求解方程即可得到 α、β、γ 的最佳值。
+
+  #figure(
+    image("pic/2024-09-25-16-18-17.png", width: 80%),
+    numbering: none,
+  )
+]
+
+== 二维静电问题的松弛法 Relaxation Method for Two-Dimensional Electrostatic Problems
+
+#figure(
+  image("pic/2024-09-25-16-24-31.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-09-25-16-24-45.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-09-25-16-25-01.png", width: 80%),
+  numbering: none,
+)
+
+#problem[
+Calculate the potential distribution inside
+one long metal groove with the two side
+surfaces and the bottom surface grounded,
+and the potential of the upper surface 10V.
+
+#figure(
+  image("pic/2024-09-25-16-28-41.png", width: 40%),
+  numbering: none,
+)
+]
+
+#solution[
+
+#figure(
+  image("pic/2024-09-25-16-29-34.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-09-25-16-29-50.png", width: 80%),
+  numbering: none,
+)
+]
