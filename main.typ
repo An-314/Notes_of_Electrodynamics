@@ -25,4 +25,8 @@
 
 #pagebreak(weak: true)
 
+#include "chap4.typ"
+
+#pagebreak(weak: true)
+
 #include "appendix.typ"
