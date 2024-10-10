@@ -377,3 +377,322 @@ $
 dv(,x) (1-x^2 dd(,x)P_n (x)) + n(n+1) P_n(x) = 0
 $
 ]
+
+== Orthogonal Functions and Expansions 正交函数与展开
+
+=== Orthogonal Functions
+
+一组实函数或复函数$U_n (xi) ,n=1,2,...,n$ 在 $(a,b)$ 上平方可积，称这组函数是标准正交的，如果
+$
+integral_a^b U_m^* (xi) U_n (xi) dd(xi) = delta_(m n)
+$
+其中$delta_(m n)$是Kronecker delta。
+
+=== Expansions in Orthonormal Functions
+
+对于任意在$(a,b)$上平方可积的函数$f(xi)$，可以用正交函数$U_n (xi)$展开
+$
+f(xi) <-> sum_(n=1)^N a_n U_n (xi)
+$
+
+系数的选择应使均方误差最小：
+$
+M_N = integral_a^b abs(f(xi) - sum_(n=1)^N a_n U_n (xi))^2 dd(xi)\
+pdv(M_N, a_n) = 0 => a_n = integral_a^b f(xi) U_n^* (xi) dd(xi)
+$
+
+证明：
+$
+M_N &= integral_a^b abs(f(xi) - sum_(n=1)^N a_n U_n (xi))^2 dd(xi)\
+&= integral_a^b (f(xi) - sum_(n=1)^N a_n U_n (xi)) (f^*(xi) - sum_(n=1)^N a_n^* U_n^* (xi)) dd(xi)\
+pdv(M_N, a_n) &= - integral_a^b f^*(xi) U_n^* (xi) dd(xi) + a_n^* = 0\
+&=> a_n = integral_a^b f(xi) U_n^* (xi) dd(xi)
+$
+
+=== Completeness of the set of orthonormal functions
+
+完备性：存在一个有限数$N_0$，对于$N>N_0$，均方误差$M_N$可以小于任意小的正数。
+
+$
+f(xi) = sum_(n=1)^oo a_n U_n (xi)
+$
+
+_数学物理中通常出现的所有正交函数集已被证明是完整的。_
+
+=== Completeness relation (or closure relation)
+
+完备性条件是
+$
+f(xi) &= sum_(n=1)^oo a_n U_n (xi) = sum_(n=1)^oo U_n (xi)integral_a^b f(xi') U_n^* (xi') dd(xi') \
+&= integral_a^b f(xi') sum_(n=1)^oo U_n (xi) U_n^* (xi') dd(xi')
+$
+注意到
+$
+integral_a^b delta(xi - xi') f(xi') dd(xi') = f(xi)
+$
+则有完备性条件
+$
+sum_(n=1)^oo U_n^* (xi') U_n (xi) = delta(xi' - xi)
+$
+
+*Fourier series.*
+
+定义在$(-a/2,a/2)$上的函数可以被基函数
+$
+f_m (x) = sqrt(2/a) sin((2 pi x m)/a)\
+g_m (x) = sqrt(2/a) cos((2 pi x m)/a)
+$
+展开为
+$
+F(x) = 1/2 A_0 + sum_(m=1)^oo A_m (cos((2 pi x m)/a) + B_m sin((2 pi x m)/a))
+$
+其中
+$
+A_m = 2/a integral_(-a/2)^(a/2) f(x) cos((2 pi x m)/a) dd(x)\
+B_m = 2/a integral_(-a/2)^(a/2) f(x) sin((2 pi x m)/a) dd(x)
+$
+该函数族也有正交归一关系
+$
+integral_(-a/2)^(a/2) f_m (x) f_n (x) dd(x) = delta_(m n)\
+integral_(-a/2)^(a/2) g_m (x) g_n (x) dd(x) = delta_(m n)\
+integral_(-a/2)^(a/2) f_m (x) g_n (x) dd(x) = 0
+$
+
+
+=== Generalization to two-dimensional
+
+对于任意函数$f(ξ,η)$，取值为$(a,b) times (c,d)$，且每个维度上的正交函数分别为$U_n (ξ)$和$V_n (η)$，可展开为
+$
+f (ξ,η) = sum_(n=1)^oo sum_(m=1)^oo a_(n m) U_n (ξ) V_m (η)
+$
+其中
+$
+a_(n m) = integral_a^b integral_c^d f(ξ,η) U_n^* (ξ) V_m^* (η) dd(ξ) dd(η)
+$
+
+*Fourier integral.*
+
+在$(-a/2,a/2)$的正交函数族
+$
+U_m (x) = 1/sqrt(a) e^((2 pi i m x)/a)
+$
+展开为
+$
+f(x) = 1/sqrt(a) sum_(m=-oo)^(oo) A_m e^((2 pi i m x)/a)
+$
+其中
+$
+A_m = 1/sqrt(a) integral_(-a/2)^(a/2) f(x') e^((-2 pi i m x')/a) dd(x')
+$
+该函数族也有正交归一关系
+$
+integral_(-a/2)^(a/2) U_m (x) U_n^* (x) dd(x) = delta_(m n)
+$
+以及完备性条件
+$
+sum_(m=-oo)^(oo) 1/a e^((2 pi i m x)/a) e^((-2 pi i m x')/a) = delta(x'-x)
+$
+当$a->oo$的时候，得到Fourier变换。
+$
+(2 pi m)/a -> k, sum_m -> integral dd(m) -> a/(2pi) integral dd(k)
+$
+则有
+$
+f(x) = 1/sqrt(2pi) integral_(-oo)^oo A(k) e^(i k x) dd(k)
+$
+其中
+$
+A(k) = 1/sqrt(2pi) integral_(-oo)^oo f(x) e^(-i k x) dd(x)
+$
+也有正交归一关系
+$
+integral_(-oo)^oo e^(i k x) e^(-i k' x) dd(x) = 2pi delta(k-k')
+$
+以及完备性条件
+$
+1/(2pi) integral_(-oo)^oo e^(i k x) e^(-i k x') dd(k) = delta(x-x')
+$
+
+== Separation of Variables; Laplace Equation in Rectangular Coordinates 分离变量；矩形坐标系下的Laplace方程
+
+
+=== Laplace Equation in Rectangular Coordinates
+
+$
+laplacian Phi = 0\
+pdv(Phi,x,2) + pdv(Phi,y,2) + pdv(Phi,z,2) = 0
+$
+
+=== Separation of Variables
+
+偏微分方程可以用三个常微分方程来求解。 
+
+电势可以用三个函数的乘积来表示：
+$
+Phi(x,y,z) = X(x) Y(y) Z(z)
+$
+代入有
+$
+Y(y) Z(z) dv(X,x,2) + X(x) Z(z) dv(Y,y,2) + X(x) Y(y) dv(Z,z,2) = 0
+$
+则有
+$
+1/X dv(X,x,2) + 1/Y dv(Y,y,2) + 1/Z dv(Z,z,2) = 0
+$
+令
+$
+1/X dv(X,x,2) =- alpha^2 , 1/Y dv(Y,y,2) =  - beta^2 , 1/Z dv(Z,z,2) = gamma^2 = alpha^2 + beta^2
+$
+分离变量的解为
+$
+Phi = (A e^(i alpha x) + B e^(-i alpha x))(C e^(i beta y) + D e^(-i beta y))(E e^(sqrt(alpha^2 + beta^2) z) + F e^(-sqrt(alpha^2 + beta^2) z))
+$
+
+#problem[
+Consider a rectangular box with dimensions $(a,b,c)$ in the $(x,y,z) $directions. All surfaces of the box are kept at zero potential, except the surface z=c, which is at potential $V(x,y)$. Find the potential everywhere inside the box.
+]
+#solution[
+#figure(
+  image("pic/2024-10-09-10-56-19.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-10-09-10-57-23.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-10-09-10-57-46.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-10-09-10-58-04.png", width: 80%),
+  numbering: none,
+)
+]
+
+分离变量的解对于边界条件会给出参数的限制条件，例如本例
+$
+X_n (x) = 2 A sin((n pi x)/a)
+$
+这里的${X_n}$就构成了一个完备的正交函数集，可以用来展开$Phi$。
+
+
+== A Two-Dimensional Potential Problem, Summation of Fourier Series 二维电势问题，Fourier级数求和
+
+=== Two-Dimensional Potential Problem
+
+$
+laplacian Phi = 0\
+pdv(Phi,x,2) + pdv(Phi,y,2) = 0
+$
+可以分离变量
+$
+Phi(x,y) = X(x) Y(y)\
+1/X dv(X,x,2) + 1/Y dv(Y,y,2) = 0
+$
+令
+$
+1/X dv(X,x,2) =- alpha^2 , 1/Y dv(Y,y,2) =  alpha^2
+$
+从而分离变量的解为
+$
+Phi = (A e^(i alpha x) + B e^(-i alpha x))(C e^(alpha y) + D e^(-alpha y))
+$
+
+#problem[
+
+Consider a two-dimensional potential problem in the region of $0≤x≤a$, $y≥0$.
+
+]
+
+#solution[
+
+#figure(
+  image("pic/2024-10-09-11-13-43.png", width: 80%),
+  numbering: none,
+)
+#figure(
+  image("pic/2024-10-09-11-14-07.png", width: 80%),
+  numbering: none,
+)
+#figure(
+  image("pic/2024-10-09-11-15-16.png", width: 80%),
+  numbering: none,
+)
+#figure(
+  image("pic/2024-10-09-11-15-35.png", width: 80%),
+  numbering: none,
+)
+#figure(
+  image("pic/2024-10-09-11-15-47.png", width: 80%),
+  numbering: none,
+)
+]
+
+== Field and Charge Densities in Two-Dimensional Corners and Along Edges 二维角和边上的场和电荷密度
+
+=== Field in Two-Dimensional Polar Coordinates
+
+二维极坐标中的Laplace方程
+$
+laplacian Phi = 0\
+1/rho pdv(,rho)(rho pdv(Phi,rho)) + 1/rho^2 pdv(Phi,phi,2) = 0
+$
+可以分离变量
+$
+Phi = R(rho) Psi(phi)
+$
+得到
+$
+rho/R dv(,rho)(rho dv(R,rho)) + 1/Psi dv(Psi,phi,2) = 0
+$
+令
+$
+1/R dv(R,rho,2) = v^2, 1/Psi dv(Psi,phi,2) = -v^2
+$
+从而分离变量的解为：
+当$v=0$时
+$
+R = a_0 + b_0 ln rho\
+Psi = A_0 + B_0 phi
+$
+当$v≠0$时
+$
+R = a_v rho^v + b_v rho^(-v)\
+Psi = A_v cos(v phi) + B_v sin(v phi)
+$
+从而分离变量的解为
+$
+Phi = a_0 + b_0 ln rho + sum_(n=1)^oo a_n rho^n sin(n phi + alpha_n) + b_n rho^(-n) sin(n phi + beta_n)
+$
+如果原点处不发散，有
+$
+b_n = 0, n=1,2,...
+$
+
+#problem[
+
+Field and Charge Densities in Two-Dimensional Corners
+]
+
+#solution[
+
+#figure(
+  image("pic/2024-10-11-01-48-04.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-10-11-01-49-43.png", width: 80%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-10-11-01-51-17.png", width: 80%),
+  numbering: none,
+)
+
+]
