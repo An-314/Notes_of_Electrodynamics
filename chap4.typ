@@ -363,8 +363,8 @@ $
 (x^3(x^2-a^2))/(x^2 + a^2)^(5/2) approx (1- a^2/x^2)/(1 + a^2/x^2)^(5/2) approx 1 - 7/2 a^2/x^2
 $
 $
-Phi(x, theta, phi) = (3V a^2)/(2 x^2) (cos theta - 7/12 a^2/x^2 (5/2 cos^3 theta - 3/2 cos theta)+ ...)
-$
+Phi(x, theta, phi) = (3V a^2)/(2 x^2) (cos theta - 7/12 a^2/x^2 (5/2 cos^3 theta - 3/2 cos theta)+ ...) 
+$<shpere>
 考虑$z$轴正半轴上的电势
 $
 theta = 0\
