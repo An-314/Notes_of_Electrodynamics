@@ -35,8 +35,11 @@ $
 
 === 线性叠加原理 Linear Superposition
 
+#text(fill: blue)[
 $
-vb(E)(vb(x)) = 1/(4 pi epsilon_0) sum_i q_i (vb(x) - vb(x_i))/abs(vb(x) - vb(x_i))^3 => vb(E)(vb(x)) = 1/(4 pi epsilon_0) integral_V' rho(vb(x')) (vb(x) - vb(x'))/abs(vb(x) - vb(x'))^3 dd(vb(x'), 3)\
+vb(E)(vb(x)) = 1/(4 pi epsilon_0) sum_i q_i (vb(x) - vb(x_i))/abs(vb(x) - vb(x_i))^3 => vb(E)(vb(x)) = 1/(4 pi epsilon_0) integral_V' rho(vb(x')) (vb(x) - vb(x'))/abs(vb(x) - vb(x'))^3 dd(vb(x'), 3)
+$]
+$
 rho(vb(x')) = sum_i q_i delta(vb(x') - vb(x_i))
 $
 
@@ -67,10 +70,11 @@ $
 
 === Gauss’s law for a discrete set of charges and continuous distribution of charges
 
+#text(fill: blue)[
 $
 integral.cont vb(E) dot vb(n) dd(a) = 1/epsilon_0 sum_i q_i = 1/epsilon_0 integral_V rho(vb(x)) dd(vb(x),3)\
 $
-
+]
 例如：
 - 无限大均匀带电平板：$E = sigma/(2 epsilon_0)$
 
@@ -84,9 +88,11 @@ $
 integral_V (div vb(E)) dd(vb(x),3) = 1/epsilon_0 integral_V rho(vb(x)) dd(vb(x),3)\
 $
 从而
+#text(fill: blue)[
 $
 div vb(E) = rho/epsilon_0
 $
+]
 这是*微分形式的Gauss定律*。
 
 == Another equation of electrostatic and the scalar potential
@@ -121,9 +127,11 @@ W = - integral_A^B q vb(E) dot vb(n) dd(a) = q (Phi(vb(B)) - Phi(vb(A)))\
 integral.cont vb(E) dot dd(vb(l)) = 0\
 $
 由旋度定理：
+#text(fill: blue)[
 $
 curl vb(E) = 0
 $
+]
 也就是说：
 - 电场是保守场
 - 电场的旋度为零
@@ -212,17 +220,21 @@ $
 
 空间任何一点的电位（不仅仅是表面）：
 #text(fill: blue)[$
-Phi(vb(x)) = 1/(4 pi epsilon_0) integral sigma(vb(x'))/abs(vb(x) - vb(x')) dd(vb(x'), 3)\
+Phi(vb(x)) = 1/(4 pi epsilon_0) integral sigma(vb(x'))/abs(vb(x) - vb(x')) dd(a')\
 $]
 计算当$vb(x)$点通过$vb(x_0^')$点穿越表面时的电位跃迁
+#figure(
+  image("pic/2024-10-30-17-50-03.png", width: 20%),
+  numbering: none,
+)
 $
-Psi(vb(x)) = 1/(4 pi epsilon_0) (integral_(S-Delta S) sigma(vb(x'))/abs(vb(x) - vb(x')) dd(a') + integral_(Delta S) sigma(vb(x'))/abs(vb(x) - vb(x')) dd(a'))\
+Phi(vb(x)) = 1/(4 pi epsilon_0) (integral_(S-Delta S) sigma(vb(x'))/abs(vb(x) - vb(x')) dd(a') + integral_(Delta S) sigma(vb(x'))/abs(vb(x) - vb(x')) dd(a'))\
 $
 其中
 $
 1/(4 pi epsilon_0) integral_(Delta S) sigma(vb(x'))/abs(vb(x) - vb(x')) dd(a') = sigma/(4 pi epsilon_0) integral_0^r_0 (2 pi r')/sqrt(r'^2 + R^2) dd(r')
 $
-- 对于体电荷和表面电荷，电势处处连续。
+- 对于体电荷和表面电荷，电势处处连续，在电荷分布范围内也如此。
 - 对于点、线或者电偶极层，电势在跃变处不连续。
 
 === 偶极子层 Dipole Layers
@@ -329,20 +341,20 @@ $
 $
 而$Phi partialderivative(,n)(1/R)$项等价于偶极子层
 $
-& Phi(vb(x)) = 1/(4 pi epsilon_0) integral_S D(vb(x')) vu(n') dot vb(nabla') (1/abs(vb(x) - vb(x'))) dd(a')\
+& Phi(vb(x)) = 1/(4 pi epsilon_0) integral_S D(vb(x')) vu(n') dot bold(nabla') (1/abs(vb(x) - vb(x'))) dd(a')\
 & D(vb(x')) = - epsilon_0 Phi
 $
 
 
 == 唯一性定理 Uniqueness of the solution with Dirichlet or Neumann Boundary conditions
 
-对于泊松（或拉普拉斯）方程，怎样的边界条件才能确保在边界区域内存在一个唯一的、良好的（即物理上合理的）解？
+对于Poisson（或Laplace）方程，怎样的边界条件才能确保在边界区域内存在一个唯一的、良好的（即物理上合理的）解？
 
 - Dirichlet边界条件：$eval(Phi(vb(x)))_S = f(S)$
 - Neumann边界条件：$eval(partialderivative(Phi(vb(x)),n))_S = g(S)$
 - 混合边界条件：一部分边界上给定Dirichlet条件，另一部分给定Neumann条件。
 
-*唯一性定理*：在给定边界条件下，泊松方程的解是唯一的。
+*唯一性定理*：在给定边界条件下，Poisson方程的解是唯一的。
 
 假设有两个解$Phi_1$和$Phi_2$，则有
 $
@@ -422,7 +434,7 @@ $
 $
 integral_V (phi laplacian psi + grad phi dot grad psi) dd(x,3) = integral.cont_S phi partialderivative(psi,n) dd(a)\
 "令" phi = 1, psi = G\
-integral_S partialderivative(G,n') dd(a') = -4pi
+integral.cont_S partialderivative(G,n') dd(a') = -4pi
 $
 $G_N$上最简单的边界条件是
 $
@@ -430,7 +442,7 @@ partialderivative(G_N,n') = -(4pi)/S "for" vb(x') "on" S\
 $
 则有
 $
-Phi(vb(x)) = 1/(4 pi epsilon_0) integral_V G_N(vb(x),vb(x')) rho(vb(x')) dd(vb(x'), 3) + 1/(4 pi) integral.cont_S Phi(vb(x')) partialderivative(Phi,n') G_N dd(vb(a)') + expval(Phi)_S
+Phi(vb(x)) = 1/(4 pi epsilon_0) integral_V G_N(vb(x),vb(x')) rho(vb(x')) dd(vb(x'), 3) + 1/(4 pi) integral.cont_S  partialderivative(Phi,n') G_N dd(vb(a)') + expval(Phi)_S
 $
 
 === Green函数的一些讨论
@@ -441,10 +453,18 @@ $
 G_D (vb(x),vb(x'))= G_D (vb(x'),vb(x))
 $
 - 对于电势的Neumann边界条件对应的格林函数：
-
-// TODO
+$
+G_N (vb(x),vb(x')) - F(vb(x))
+$
+是关于$vb(x)$和$vb(x')$的对称函数，其中
+$
+F(vb(x)) = 1/S integral.cont_S G_N (vb(x),vb(y)) dd(a_y)
+$
 
 考虑到格林函数是一个单位点源产生的势能，对称性仅仅代表了源点和观测点的物理互换性。
+
+*$F$的含义*
+- $F$在Green函数相当于区域外的势能，它补齐了边界条件。
 
 === 一些Green函数的例子
 
@@ -752,7 +772,7 @@ $
 
 ]
 
-== 求解拉普拉斯方程和泊松方程的变分法 Variational Method for Solving Laplace’s and Poisson’s Equations
+== 求解Laplace方程和Poisson方程的变分法 Variational Method for Solving Laplace’s and Poisson’s Equations
 
 === 泛函 Functional
 
@@ -819,7 +839,7 @@ $
 随着系统的演化，$q$在配置空间中描绘出一条路径（仅显示部分路径）。在系统配置（$δ q$）发生微小变化的情况下，系统走过的路径（红色）具有静态作用（$δ S = 0$）。
 
 - 如何找到所需的极值函数？
-  - 找到一个函数。这是 E/M 场的类能量函数。它的极值函数应是泊松方程。
+  - 找到一个函数。这是 E/M 场的类能量函数。它的极值函数应是Poisson方程。
   - 用一些待定义的参数构建一个"试验"函数。
   - 将 "试验 "函数放入函数中，并设置未定义参数的偏导数。 
   - 解方程。
