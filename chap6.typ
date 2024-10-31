@@ -64,10 +64,12 @@ $
     $
 
 在直角坐标系里
+#text(fill: blue)[
 $
 Phi(vb(x)) = 1/(epsilon_0) sum_(l=0)^oo sum_(m=-l)^l 1/(2l+1) (integral rho(vb(x')) r'^l Y^*_(l m) (theta', phi') dd(x',3)) (Y_(l m) (theta, phi))/(r^(l+1))\
 Phi(vb(x)) = 1/(4 pi epsilon_0) (q/r + (vb(p) dot vb(x))/r^3 + 1/2 sum_(i j) Q_(i j) (x_i x_j)/r^5 + ...)
 $
+]
 其中
 $
 q_(0 0) &= 1/sqrt(4 pi) q\
@@ -178,6 +180,21 @@ integral_(r<R) vb(E) (vb(x)) &= integral_(r<R) grad Phi(vb(x)) dd(x,3)\
 &= - integral_(r=R) Phi(vb(x)) vu(n) dd(a) = - R^2 integral_(r=R) Phi(vb(x)) vu(n) dd(Omega)\
 &= - R^2/(4 pi epsilon_0) integral dd(x',3) rho(vb(x')) integral_(r=R) vu(n)/abs(vb(x) - vb(x')) dd(Omega)\
 $
+注意到
+$
+integral_(r=R) vu(n)/abs(vb(x) - vb(x')) dd(Omega) =integral r_</r_>^2  vu(n) cos gamma dd(Omega)
+$
+这是因为对于
+$
+1/abs(vb(x) - vb(x')) = sum_(l=0)^oo r_<^l/r_>^(l+1) P_l (cos theta)
+$
+只有$l=1$的成分，该积分结果为
+$
+integral_(r=R) vu(n)/abs(vb(x) - vb(x')) dd(Omega) = (4 pi)/3 vu(n')
+$
+$
+integral_(r<R) vb(E) (vb(x)) = - R^2/(3 epsilon_0) integral r_</r_>^2 rho(vb(x')) vu(n') dd(x',3)
+$
 有
 $
 integral_(r<R) vb(E) (vb(x)) &= - vb(p)/(3 epsilon_0) &(a) "For all the charges are inside the sphere"\
@@ -285,6 +302,10 @@ $
 得到
 $
 Phi(vb(x)) = 1/(4 pi epsilon_0) integral dd(x,3)1/abs(vb(x) - vb(x)') (rho(vb(x')) - bold(nabla)' dot vb(P)(vb(x')))
+$
+也就是说
+$
+div vb(E) = 1/epsilon_0 (rho - div vb(P))
 $
 
 === Macroscopic Maxwell Equations for Electrostatics 电静学的宏观 Maxwell 方程
@@ -394,5 +415,348 @@ Find the potential produced by a point charge $q$ embedded in a semiinfinite die
 
 #figure(
   image("pic/2024-10-29-21-55-01.png", width: 30%),
+  numbering: none,
+)
+
+#solution[
+
+$
+epsilon_1 div vb(E)_1 = rho ,&z>0\
+epsilon_2 div vb(E)_2 = 0 ,&z<0\
+div vb(E) =0
+$
+以及边界条件
+$
+lim_(z->0^+) mat(epsilon_1 E_z; E_x; E_y) = lim_(z->0^-) mat(epsilon_2 E_z; E_x; E_y)\
+$
+
+#figure(
+  image("pic/2024-11-01-00-14-54.png", width: 100%),
+  numbering: none,
+)
+$
+eval(pdv(,z)(1/R_1))_(z=0) = - eval(pdv(,z)(1/R_2))_(z=0) = d/(rho^2+d^2)^(3/2)\
+eval(pdv(,rho)(1/R_1))_(z=0) = eval(pdv(,rho)(1/R_2))_(z=0) = - rho/(rho^2+d^2)^(3/2)
+$
+再结合边界条件$E_z = pdv(Phi,z)$，可以得到上面的结果。
+#figure(
+  image("pic/2024-11-01-00-18-34.png", width: 60%),
+  numbering: none,
+)
+]
+
+#problem[
+
+Find the potential when a dielectric sphere of radius a with dielectric constant $ε/ε_0$ is placed in an initially uniform electric field, which at large distances from the sphere is directed along the z-axis and has magnitude $E_0$.
+]
+
+#figure(
+  image("pic/2024-11-01-00-32-16.png", width:40%),
+  numbering: none,
+)
+
+#solution[
+
+
+#figure(
+  image("pic/2024-11-01-00-36-07.png", width: 90%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-11-01-00-47-30.png", width: 90%),
+  numbering: none,
+)
+
+]
+
+- Electric Permittivity $epsilon$ 介电常数
+- Dielectric Constant $epsilon/epsilon_0 = 1 + chi_e = epsilon_r$ 相对介电常数
+- Molecular Polarizability $gamma_"mol"$ 分子极化率
+- Susceptibility (macroscopic parameter) $chi_e$ 电极化率
+- Electric Polarization $vb(P)$ 电极化矢量
+- Average molecular dipole moment $expval(vb(p)) = vb(P)/N$ 分子平均偶极矩
+- Dipole moment $vb(p)=vb(P) Delta V$ 偶极矩
+
+== Molecular Polarizability and Electric Susceptibility 分子极化率和电极化率
+
+=== Molecular Polarizability 分子极化率 $gamma_"mol"$
+
+定义为平均分子偶极矩与分子处电场$ε_0$的比值：
+$
+gamma_"mol" = expval(vb(p)_"mol")/(ε_0(E+E_i))
+$
+其中，$E$是平均宏观场，$E_i$是通过邻近分子的极化产生内场，$expval(vb(p)_"mol")$是分子的平均偶极矩
+$
+expval(vb(p)_"mol") = vb(P)/N
+$
+其中，$N$是单位体积内分子的平均数量。
+$
+E_i = E_"near" - E_P = E_P
+$
+其中 $E_"near"$ 是附近分子的实际贡献，对于大多数材料，$E_"near" ≈ 0$；$E_P$ 是附近分子的平均贡献。
+
+=== Clausius-Mossotti Equation
+
+对于一个宏观上很小，但微观上很大的体积 $V$（半径为 $R$ 的球体）来说：
+$
+vb(p) = (4 pi R^3)/(3) vb(P)
+$
+由于
+$
+integral_(r<R) vb(E) (vb(x)) dd(x,3) = - vb(p)/(3 epsilon_0)
+$
+有
+$
+vb(E)_P = 3/(4 pi R^3) integral_(r<R)vb(E) dd(x,3) = - 3/(4 pi R^2) vb(p)/(3 epsilon_0) = - vb(P)/(3 epsilon_0)
+$
+而
+$
+vb(P) = N expval(vb(p)_"mol") = N gamma_"mol" epsilon_0 (vb(E)+vb(E)_i)\
+vb(E)_i = - vb(E)_P = vb(P)/(3 epsilon_0)
+$
+则有
+$
+vb(P) = N gamma_"mol" epsilon_0 (vb(E) + vb(P)/(3 epsilon_0))\
+vb(P) = epsilon_0 chi_e vb(E)
+$
+则有
+$
+chi_e = (N gamma_"mol")/(1 - 1/3 N gamma_"mol")
+$
+结合 $epsilon = epsilon_0 (1 + chi_e)$，得到
+$
+gamma_"mol" = 3/N ((epsilon/epsilon_0 -1)/(epsilon/epsilon_0 + 2))
+$
+
+== Models for Electric Polarizability 电极化率模型
+
+=== Two ways of the polarization of a collection of atoms or molecules
+
+- 外加电场会扭曲电荷分布，从而在每个分子中产生感应偶极矩。
+
+#figure(
+  image("pic/2024-11-01-01-04-08.png", width: 80%),
+  numbering: none,
+)
+
+- 外加磁场会使分子最初随机定向的永久偶极矩排列成直线。
+
+#figure(
+  image("pic/2024-11-01-01-08-30.png", width: 80%),
+  numbering: none,
+)
+
+=== Model of Harmonically Bound Charges (First Way) 谐振电荷模型
+
+恢复力：
+$
+vb(F) = - m omega_0^2 vb(x)
+$
+在电场 $vb(E)$ 的作用下，电荷从平衡状态移出 $vb(x)$，移出量为
+$
+m omega_0^2 vb(x) = e vb(E)
+$
+感应偶极矩
+$
+vb(p)_"mol" = e vb(x) = e^2/(m omega_0^2) vb(E)
+$
+分子极化性
+$
+gamma_"mol" = e^2/(m omega_0^2 epsilon_0)
+$
+
+#figure(
+  image("pic/2024-11-01-01-16-47.png", width: 40%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-11-01-01-17-35.png", width: 60%),
+  numbering: none,
+)
+
+=== Model of Orientation
+
+#figure(
+  image("pic/2024-11-01-01-19-19.png", width: 80%),
+  numbering: none,
+)
+
+平均偶极矩为
+$
+expval(vb(p)_"mol") = 1/3 p_0^2/(k T) vb(E)
+$
+$p_0$：假定所有分子都拥有的永久偶极矩
+$
+gamma_"mol" = 1/(3 epsilon_0) p_0^2/(k T)
+$
+
+=== Summary of Molecular Polarization
+
+一般来说，"诱导 "和 "定向 "两种偏振都存在。
+
+分子极化的一般形式：
+$
+gamma_"mol" = gamma_i + 1/(3 epsilon_0) p_0^2/(k T)
+$
+
+== Electrostatic Energy in Dielectric Media 电介质中的静电能
+
+=== The Energy of a System of Charge in Free Space:
+
+$
+W = 1/2 integral rho Phi dd(tau) = 1/2 integral epsilon_0 E^2 dd(tau)
+$
+- 在无穷大的表面上，电势为零
+- 电荷的最终形态是由各元素电荷一点一点组合而成的，每个元素电荷都是在现有电场的作用下，从无限远的地方带过来的。
+
+=== The Energy of Dielectric Media
+
+- 将真实（宏观）电荷带入其位置
+- 在介质中产生某种极化状态
+
+#figure(
+  image("pic/2024-11-01-01-25-58.png", width: 30%),
+  numbering: none,
+)
+
+Small energy change $δ W$ due to $δ ρ$
+$
+delta W = integral delta rho(vb(x)) Phi(vb(x)) dd(x,3)
+$
+其中
+$
+delta rho = div (delta vb(D))\
+delta W = integral div (delta vb(D)) Phi dd(x,3) = integral div(Phi delta vb(D)) dd(x,3) - grad Phi dot  delta vb(D) dd(x,3) = integral.cont (Phi delta vb(D)) dot dd(vb(a)) + integral vb(E) dot delta vb(D) dd(x,3)
+$
+从而
+$
+delta W = integral vb(E) dot delta vb(D) dd(x,3)
+$
+从而
+$
+W = integral dd(x,3) integral_0^vb(D) vb(E) dot dd(vb(D))
+$
+线性电介质中
+$
+vb(E)dot delta vb(D) = 1/2 delta (vb(E) dot vb(D))
+$
+则有
+$
+W = 1/2 integral vb(D) dot vb(E) dd(x,3)\
+W = 1/2 integral rho(vb(x)) Phi(vb(x)) dd(x,3)
+$
+仅适用于线性介质。
+
+=== Energy Change Induced by a Dielectric Object with a Linear Response for Fixed Sources of the Field 由线性响应的电介质物体引起的能量变化
+
+#figure(
+  image("pic/2024-11-01-01-48-39.png", width: 30%),
+  numbering: none,
+)
+初始静电能量：
+$
+W_0 = 1/2 integral vb(E)_0 dot vb(D)_0 dd(x,3)
+$
+$E_0$：电荷$ρ_0(x)$在电感应强度$ε_0$（$ε_0$并非真空的电感应强度）介质中的一定分布所产生的初始场，$D_0 = ε_0 E_0$。
+
+将体积为 $V_1$ 的电介质物体引入场后，场从 $E_0$ 变为 $E$。假设体积$V_1$内的$ε(vb(x))$为$ε_1$，它从$ε_1$快速但连续地下降到边缘处的$ε_0$。在体积 $V_1$ 外部，电感应强度为 $ε_0$ 。
+
+引入介质物体后的静电能量
+#figure(
+  image("pic/2024-11-01-01-43-17.png", width: 100%),
+  numbering: none,
+)
+
+=== Energy Change Induced by a Dielectric Object with a Linear Response for Fixed Potentials of the Electrodes 由线性响应的电介质物体引起的能量变化
+
+#figure(
+  image("pic/2024-11-01-01-48-59.png", width: 40%),
+  numbering: none,
+)
+
+由于宏观电荷密度发生某种变化 $δ ρ$ 而导致的能量变化：
+$
+delta W = integral delta rho(vb(x)) Phi(vb(x)) dd(x,3)\
+W = 1/2 integral rho(vb(x)) Phi(vb(x)) dd(x,3)
+$
+线性电介质中
+$
+delta W = 1/2 integral (delta rho Phi + rho delta Phi) dd(x,3)
+$
+如果介电特性不变：$ε(x)$ 不变
+$
+integral (delta rho Phi) dd(x,3) = integral (rho delta Phi) dd(x,3)
+$
+如果将$ρ$解释为由自由电荷密度和极化电荷密度组成，则上述积分相等关系始终成立。
+
+#figure(
+  image("pic/2024-11-01-01-52-01.png", width: 80%),
+  numbering: none,
+)
+
+=== Force acting on a Dielectric Object 作用在电介质物体上的力
+
+以 $F_e$ 的力将电介质拉出无限小距离 $dd(ξ)$ 所需的功
+$
+dd(W) = F_e dd(ξ)
+$
+$F_e$ 是抵消作用在电介质上的电场力 $F_ξ$ 所需的力：
+$
+F_ξ = - F_e = - dd(W)/dd(ξ)
+$
+在不需要对最终产生电场力的边缘场有任何了解的情况下，可以计算出这个力。
+
+#problem[
+
+Suppose you have enough linear dielectric material, of dielectric constant $ε_r$, to half-fill a parallel-plate capacitor. By what fraction is the capacitance increased when you distribute the material as in (a) and (b)?
+
+]
+
+#solution[
+
+没有电介质：
+$
+C = epsilon_0 A/d
+$
+
+
+#figure(
+  image("pic/2024-11-01-01-57-20.png", width: 100%),
+  numbering: none,
+)
+]
+
+#problem[
+
+Calculate the force on the dielectric in the case of a slab of linear dielectric material partially inserted between the plates of a parallel-plate capacitor.
+
+]
+
+#solution[
+
+#figure(
+  image("pic/2024-11-01-02-01-19.png", width: 90%),
+  numbering: none,
+)
+
+#figure(
+  image("pic/2024-11-01-02-03-07.png", width: 80%),
+  numbering: none,
+)
+
+- 用 $delta W_V = - F_x delta x$（ $V$ 不变）来计算力是不对的
+- $delta W_V = -delta W_Q$
+- 电介质体上的电场力与电介质体的微小位移 $δ x$
+  $
+  F_x = - (pdv(W,x))_Q = + (pdv(W,x))_V
+  $
+  两个电场力的方向仍然相同。
+
+]
+
+#figure(
+  image("pic/2024-11-01-02-06-34.png", width: 80%),
   numbering: none,
 )

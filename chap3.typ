@@ -582,7 +582,7 @@ $
 #text(fill: blue)[
 $
 W &= 1/(4 pi epsilon_0) sum_(i=1)^(n) sum_(j<i) (q_i q_j)/abs(vb(x_i) - vb(x_j))\
-&= 1/(8 pi epsilon_0) sum_(i!=j) q_i q_j/abs(vb(x_i) - vb(x_j))\
+&= 1/(8 pi epsilon_0) sum_(i!=j) (q_i q_j)/abs(vb(x_i) - vb(x_j))\
 $
 ]
 这里没有$i=j$一项，故考虑是互能而忽略自能。

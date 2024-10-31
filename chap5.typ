@@ -23,18 +23,22 @@ $
 r^2 sin^2 theta (1/U dv(U,r,2) + 1/(P r^2 sin theta) dv(,theta)(sin theta dv(P,theta))) + 1/(Q) dv(Q,phi,2) = 0
 $
 有
+#text(fill:red)[
 $
 1/(Q) dv(Q,phi,2) = -m^2 => Q = e^(plus.minus i m phi),m in ZZ
 $
+]
 以及
 $
 (P r^2)/U dv(U,r,2) + 1/(sin theta) dv(,theta)(sin theta dv(P,theta)) = (m^2 P)/(sin^2 theta)
 $
 分离，得到
+#text(fill:red)[
 $
 1/(sin theta) dv(,theta)(sin theta dv(P,theta)) + (l(l+1) - (m^2)/(sin^2 theta))P = 0\
 dv(U,r,2) - (l(l+1) U)/(r^2) = 0 => U = A r^(l+1) + B r^(-l)
 $
+]
 
 == Legendre Equation and Legendre Polynomials Legendre方程和Legendre多项式
 
@@ -113,16 +117,20 @@ P_l (-x) = (-1)^l P_l (x)
 $
 
 *Rodrigues' formula*
+#text(fill:red)[
 $
 P_l (x) = 1/(2^l l!) dv(,x,l) (x^2 - 1)^l
 $
+]
 
 === Complete Orthogonal
 
 Legendre 多项式是 $[-1,1]$上的完备正交函数系，即
+#text(fill:red)[
 $
 integral_(-1)^1 P_l (x) P_k (x) dd(x) = 2/(2l + 1) delta_(l k)
 $
+]
 
 #figure(
   image("pic/2024-10-18-11-55-04.png", width: 80%),
@@ -176,9 +184,11 @@ $
 
 === Laplace Problem with Azimuthal Symmetry
 
+#text(fill:red)[
 $
 Phi(r, theta) = sum_(l=0)^oo (A_l r^l + B_l r^(-l-1)) P_l (cos theta)
 $
+]
 
 #problem[
 
@@ -235,9 +245,11 @@ $
 1/abs(vb(x)-vb(x')) = 1/r_> sum_(l=0)^oo ((r_<)/(r_>))^l
 $
 所以对于任意的$x$，有
+#text(fill:red)[
 $
 1/abs(vb(x)-vb(x')) = 1/r_> sum_(l=0)^oo ((r_<)/(r_>))^l P_l (cos theta)
 $
+]
 ]
 
 #problem[
@@ -344,9 +356,11 @@ Orthogonal set:
   integral_0^(2pi) e^(i(m-m')phi) dd(phi) = 2pi delta_(m m')
   $
 在单位球面上以$l,m$两种指数构成一个完整的正交集合：
+#text(fill:red)[
 $
 Y_(l m) (theta, phi) = sqrt((2l+1)/(4pi) (l-m)!/(l+m)!) P_l^m (cos theta) e^(i m phi)
 $
+]
 有正交归一关系
 $
 integral_0^(2pi) integral_(-1)^1 Y^*_(l' m') (theta, phi) Y_(l m) (theta, phi) sin theta dd(theta) dd(phi) = delta_(l' l) delta_(m' m)
@@ -690,18 +704,21 @@ $
   numbering: none,
 )
 最终得到Green函数
+#text(fill: red)[
 $
 G(vb(x),vb(x')) = 4 pi sum_(l=0)^oo sum_(m=-l)^l ( Y_(l m)^* (theta', phi') Y_(l m) (theta, phi))/((2l+1)(1-(a/b)^(2l+1))) (r_<^l - a^(2l+1)/r_<^(l+1))(1/r_>^(l+1) - r_>^l/b^(2l+1))
 $
-
+  ]
 - $a->0,b->oo$得到自由空间的Green函数
   $
   G(vb(x),vb(x')) = 1/abs(vb(x) - vb(x')) = 4 pi sum_(l=0)^oo sum_(m=-l)^l 1/(2l+1) r_<^l/r_>^(l+1) Y^*_(l m) (theta', phi') Y_(l m) (theta, phi)
   $
 - $b->oo$得到球壳的Green函数
+
   $
   G(vb(x),vb(x')) = 4 pi sum_(l=0)^oo sum_(m=-l)^l 1/(2l+1) (r_<^l/r_>^(l+1) - 1/a (a^2/(r r'))^(l+1)) Y_(l m)^* (theta', phi') Y_(l m) (theta, phi)
   $
+
 - 对于内部问题$a->0$
 
 == Solution of Potential Problems with the Spherical Green Function Expansion 用球形Green函数展开解决电势问题

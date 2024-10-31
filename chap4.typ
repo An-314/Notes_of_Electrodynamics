@@ -16,13 +16,13 @@
 
 A point charge located in front of an infinite plane conductor at zero potential.
 
-#figure(
-  image("pic/2024-09-27-15-39-01.png", width: 80%),
-  numbering: none,
-)
 
 左侧是原始电位问题，右侧是等效图像问题。
 ]
+#figure(
+  image("pic/2024-09-27-15-39-01.png", width: 40%),
+  numbering: none,
+)
 
 == 接地导体存在时的点电荷 Point Charge in the Presence of a Grounded Conducting Sphere
 
@@ -30,14 +30,14 @@ A point charge located in front of an infinite plane conductor at zero potential
 
 What is the potential produced by a point charge $q$ located at $y$ relative to the origin, around which is centered a grounded conducting sphere of radius $a$? And what is the force acting on the charge $q$?
 
-#figure(
-  image("pic/2024-09-27-15-41-20.png", width: 80%),
-  numbering: none,
-)
 
 Grounded conducting sphere of radius $a$, with charge $q$ and image charge $q'$.
 
 ]
+#figure(
+  image("pic/2024-09-27-15-41-20.png", width: 30%),
+  numbering: none,
+)
 
 #solution[
 
@@ -266,9 +266,11 @@ $
 === General Solution for the Potential
 
 Dirichlet 边界条件@DbGreen 下静电边界值问题的形式解法
+#text(fill:red)[
 $
 Phi(vb(x)) = 1/(4 pi epsilon_0) integral_V G_D(vb(x),vb(x')) rho(vb(x')) dd(vb(x'), 3) - 1/(4 pi) integral.cont_S Phi(vb(x')) partialderivative(G_D,n') dd(vb(a)')\
 $
+]
 其中
 $
 G_D (vb(x), vb(x')) = 0
@@ -286,11 +288,13 @@ $
 rho(vb(x')) = 0
 $
 从而
+#text(fill:blue)[
 $
 Phi(vb(x)) &= 1/(4pi) integral.cont_S Phi(vb(x')) partialderivative(G_D,n') dd(vb(a)')\
 &= 1/(4pi) integral.cont_S Phi(a,theta',phi') (x^2 - a^2)/(a(x^2 + a^2 - 2 x a cos gamma)^(3/2)) dd(a')\
-&= 1/(4pi) integral.cont_S Phi(a,theta',phi') (a(x^2 - a^2))/(a(x^2 + a^2 - 2 x a cos gamma)^(3/2)) dd(Omega')\
+&= 1/(4pi) integral Phi(a,theta',phi') (a(x^2 - a^2))/(a(x^2 + a^2 - 2 x a cos gamma)^(3/2)) dd(Omega')\
 $
+]
 对于Posson方程，该项代入@DbGreen，即可。
 
 对于内部问题，$pdv(G_D,n')$的符号正好相反。
@@ -374,7 +378,7 @@ $
 
 Legendre 多项式是普通 Legendre 微分方程的解：
 $
-dv(,x) (1-x^2 dd(,x)P_n (x)) + n(n+1) P_n(x) = 0
+dv(,x) (1-x^2 dv(,x)P_n (x)) + n(n+1) P_n(x) = 0
 $
 ]
 
@@ -544,9 +548,11 @@ $
 1/X dv(X,x,2) =- alpha^2 , 1/Y dv(Y,y,2) =  - beta^2 , 1/Z dv(Z,z,2) = gamma^2 = alpha^2 + beta^2
 $
 分离变量的解为
+#text(fill:red)[
 $
 Phi = (A e^(i alpha x) + B e^(-i alpha x))(C e^(i beta y) + D e^(-i beta y))(E e^(sqrt(alpha^2 + beta^2) z) + F e^(-sqrt(alpha^2 + beta^2) z))
 $
+]
 
 #problem[
 Consider a rectangular box with dimensions $(a,b,c)$ in the $(x,y,z) $directions. All surfaces of the box are kept at zero potential, except the surface z=c, which is at potential $V(x,y)$. Find the potential everywhere inside the box.
@@ -598,9 +604,11 @@ $
 1/X dv(X,x,2) =- alpha^2 , 1/Y dv(Y,y,2) =  alpha^2
 $
 从而分离变量的解为
+#text(fill:red)[
 $
 Phi = (A e^(i alpha x) + B e^(-i alpha x))(C e^(alpha y) + D e^(-alpha y))
 $
+]
 
 #problem[
 
@@ -665,9 +673,11 @@ R = a_v rho^v + b_v rho^(-v)\
 Psi = A_v cos(v phi) + B_v sin(v phi)
 $
 从而分离变量的解为
+#text(fill:red)[
 $
 Phi = a_0 + b_0 ln rho + sum_(n=1)^oo a_n rho^n sin(n phi + alpha_n) + b_n rho^(-n) sin(n phi + beta_n)
 $
+]
 如果原点处不发散，有
 $
 b_n = 0, n=1,2,...
