@@ -45,4 +45,24 @@
 
 #pagebreak(weak: true)
 
+#include "chap9.typ"
+
+#pagebreak(weak: true)
+
+#include "chap10.typ"
+
+#pagebreak(weak: true)
+
+#include "chap11.typ"
+
+#pagebreak(weak: true)
+
+#include "chap12.typ"
+
+#pagebreak(weak: true)
+
+#include "chap13.typ"
+
+#pagebreak(weak: true)
+
 #include "appendix.typ"
