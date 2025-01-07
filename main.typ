@@ -1,4 +1,4 @@
-#import "@local/mytemplate:1.0.0": *
+#import "template.typ": *
 
 #show: project.with(
   template: "book",

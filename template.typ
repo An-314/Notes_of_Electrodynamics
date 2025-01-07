@@ -1,4 +1,20 @@
 /* This is a template for writing articles in Chinese. */
+#import "@preview/tablex:0.0.6": tablex, hlinex
+#import "@preview/tablem:0.1.0": tablem
+
+#let three-line-table = tablem.with(
+  render: (columns: auto, ..args) => {
+    tablex(
+      columns: columns,
+      auto-lines: false,
+      align: center + horizon,
+      hlinex(y: 0),
+      hlinex(y: 1),
+      ..args,
+      hlinex(),
+    )
+  }
+)
 
 #let newpara() = {
   par()[#text(size: 0.0em)[#h(0.0em)]]
@@ -20,9 +36,9 @@
   body
 ) = {
   /****** 设置字体 ******/
-  let song = ("Linux Libertine", "SimSun")
-  let hei = ("Linux Libertine", "SIMHEI")
-  let kai = ("Linux Libertine", "KaiTi",)
+  let song = ("CMU Serif", "Linux Libertine", "SimSun")
+  let hei = ("CMU Serif", "Linux Libertine", "SIMHEI")
+  let kai = ("CMU Serif","Linux Libertine", "KaiTi",)
   let xbsong = "FZXiaoBiaoSong-B05"
   let code = "Consolas"
   let title-font = hei
@@ -206,10 +222,6 @@
     #align(center)[#it]
   ]
   // 数学公式
-  show heading.where(level:1): it => {
-  counter(math.equation).update(0)
-  it
-  }
   set math.equation(numbering: it => {
     locate(loc => {
       let count = counter(heading.where(level:1)).at(loc).last()
@@ -220,7 +232,9 @@
   let pageheading = [
     #set text(font: header-font)
     #let header = if(template in ("article")) {
+      if(selector(heading.where(level:1)) == true){
       locate(loc => [#locate(loc => [#counter(heading.where(level:1)).display() #query(selector(heading.where(level:1)).before(loc), loc).last().body.text])])
+      }
     }else{
       ""
     }
@@ -247,15 +261,28 @@
     mkauthor(authors)
     mktime(time)
     if (contents){
-    set page(numbering: "I", number-align: center,header: pageheading,)
-    counter(page).update(1)
-    mkabstruct(abstract, keywords)
-    mkcontent(contents)
+      set page(numbering: "I", number-align: center,header: pageheading,)
+      counter(page).update(1)
+      mkabstruct(abstract, keywords)
+      v(2em)
+      mkcontent(contents)
     }
+    let pageheading = [
+      #set text(font: header-font)
+      #let header = locate(loc => [#locate(loc => [#counter(heading.where(level:1)).display() #query(selector(heading.where(level:1)).before(loc), loc).last().body.text])])
+      #if(header != "" and header != none) {
+        locate(loc => if(loc.page() != 1) [#title #h(1fr) #info #h(1fr) #header])}else{
+        locate(loc => if(loc.page() != 1) [#title #h(1fr) #info])
+      }
+    ]
     set page(numbering: "1", number-align: center,header: pageheading,)
     counter(page).update(1)
     if (contents != true){
       mkabstruct(abstract, keywords)
+    }
+    show heading.where(level:1): it => {
+      counter(math.equation).update(0)
+      it
     }
     body
   }else if(template in ("book")){
@@ -290,8 +317,21 @@
       counter(page).update(1)
       mkcontent(contents)
     }
+    let pageheading = [
+      #set text(font: header-font)
+      #let header = locate(loc => [#locate(loc => [#counter(heading.where(level:1)).display() #query(selector(heading.where(level:1)).before(loc), loc).last().body.text])])
+      #if(header != "" and header != none) {
+        locate(loc => if(loc.page() != 1) [#title #h(1fr) #info #h(1fr) #header])}else{
+        locate(loc => if(loc.page() != 1) [#title #h(1fr) #info])
+      }
+    ]
     set page(numbering: "1", number-align: center, header: pageheading,)
     counter(page).update(1)
+    show heading.where(level:1): it => {
+      counter(math.equation).update(0)
+      it
+    }
+
     body
   }
 }
@@ -318,4 +358,38 @@
     inset: 8pt,
     width: 100%
   )[*解答.* #h(0.75em) #body]
+}
+
+
+#let theorem-counter = counter("theorem")
+#show heading.where(level:1): it => {
+      counter("theorem").update(0)
+      it
+    }
+
+// #set enum(numbering: it => {
+//     locate(loc => {
+//       let count = counter(heading.where(level:1)).at(loc).last()
+//       numbering("(1.1)", count, it)
+//     })
+//   })
+#let theorem(body, name:none) = {
+  theorem-counter.step()
+  
+  block(
+    fill: rgb(241, 241, 255),
+    inset: 8pt,
+    radius: 2pt,
+    width: 100%,
+  )[*Theorem [#counter(heading.where(level:1)).display().#theorem-counter.display()]* #if(name!=none){text(style: "italic",weight: "bold", name)} #h(0.75em) #body]
+}
+
+#let proof(body) = {
+  set enum(numbering: "(1)")
+  block(
+    inset: 8pt,
+    width: 100%
+  )[_Proof._ #h(0.75em) #body 
+  #align(right)[$qed$]
+  ]
 }
